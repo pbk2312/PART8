@@ -38,10 +38,16 @@ public class CustomSecurityConfig {
         // http.formLogin(); 스프링 부트 버전 변경
 
         http.formLogin(form -> form.loginPage("/member/login")); // 로그인이 필요한 경우에 'member/login' 으로 자동 리다이렉트 되도록 함
+        // POST 방식 처리 역시 같은 경로로 스프링 시큐리티 내부에서 처리됩니다.로그아웃 방식도 마찬가지로 POST 방식으로 처리되는 로그아웃
+        // 역시 스프링 시큐리티가 처리하고 개발자가 간단하게 GET 방식으로 동작하는 로그아웃 화면을 구성하기만 하면 됩니다.
+
+        // http.csrf().disable();
+        http.csrf(csrf -> csrf.disable()); // 버전 변경 , CSRF 토큰 비활성화 -> username 과 password 라는 파라미터만으로 로그인 가능
+
 
         return http.build();
 
-
+        //
     }
 
     @Bean

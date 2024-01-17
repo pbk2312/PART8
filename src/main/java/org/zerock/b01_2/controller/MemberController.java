@@ -15,9 +15,13 @@ public class MemberController {
 
 
     @GetMapping("/login")
-    public void loginGET(String error,String logout){ // 나중에 로그인 과정에 문제가 생기거나 로그아웃 처리시에 사용하기 위해서 두개의 파라미터 지정
+    public void loginGET(String errorCode,String logout){ // 나중에 로그인 과정에 문제가 생기거나 로그아웃 처리시에 사용하기 위해서 두개의 파라미터 지정
         log.info("login get......");
         log.info("logout : " + logout);
+
+        if (logout != null){
+            log.info("user logout......");
+        }
 
     }
 
