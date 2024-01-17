@@ -37,7 +37,7 @@ public class CustomSecurityConfig {
 
         // http.formLogin(); 스프링 부트 버전 변경
 
-        http.formLogin(form -> form.loginPage("/member/login"));
+        http.formLogin(form -> form.loginPage("/member/login")); // 로그인이 필요한 경우에 'member/login' 으로 자동 리다이렉트 되도록 함
 
         return http.build();
 
