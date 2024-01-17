@@ -35,8 +35,9 @@ public class CustomSecurityConfig {
 
         log.info("------configure--------");
 
-        // http.formLogin();
-        http.formLogin();
+        // http.formLogin(); 스프링 부트 버전 변경
+
+        http.formLogin(form -> form.loginPage("/member/login"));
 
         return http.build();
 
