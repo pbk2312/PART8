@@ -98,6 +98,7 @@ public class BoardController {
     }
 
 
+    @PreAuthorize("isAuthenticated()") // 로그인한 사용자만 조회할수 있도록 함
     @GetMapping({"/read", "/modify"})
     public void read(Long bno, PageRequestDTO pageRequestDTO, Model model) {
 

@@ -12,12 +12,23 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.zerock.b01_2.security.CustomUserDetailService;
+import org.zerock.b01_2.security.Handler.Custom403Handler;
+
+import javax.sql.DataSource;
 
 @Log4j2
 @RequiredArgsConstructor
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 public class CustomSecurityConfig {
+
+    // 주입 필요
+    private final DataSource dataSource;
+    private final CustomUserDetailService userDetailsService;
 
 
     @Bean
@@ -45,6 +56,19 @@ public class CustomSecurityConfig {
         http.csrf(csrf -> csrf.disable()); // 버전 변경 , CSRF 토큰 비활성화 -> username 과 password 라는 파라미터만으로 로그인 가능
 
 
+        http.rememberMe(remember -> remember
+                .key("12345678")
+                .tokenRepository(persistentTokenRepository())
+                .userDetailsService(userDetailsService)
+                .tokenValiditySeconds(60 * 60 * 24 * 30));
+
+        http.logout(logout -> logout.deleteCookies("remember-me"));
+
+        http.exceptionHandling(config -> {
+            config.accessDeniedHandler(accessDeniedHandler());
+        });
+
+
         return http.build();
 
         //
@@ -59,6 +83,18 @@ public class CustomSecurityConfig {
         return (web -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations()));
 
 
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
+        repo.setDataSource(dataSource);
+        return repo;
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new Custom403Handler();
     }
 
 
