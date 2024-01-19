@@ -110,6 +110,7 @@ public class BoardController {
 
     }
 
+    @PreAuthorize("principal.username == #boardDTO.writer")
     @PostMapping("/modify")
     public String modify(PageRequestDTO pageRequestDTO,
                          @Valid BoardDTO boardDTO,
@@ -154,6 +155,7 @@ public class BoardController {
     }
      */
 
+    @PreAuthorize("principal.username == #boardDTO.writer") // 만약 다른 사용자가 작성한 게시물을 삭제하려고 한다면 AccessDeniedHandler 가 작성되어 있으므로 로그인 페이지로 감
     @PostMapping("/remove")
     public String remove(BoardDTO boardDTO, RedirectAttributes redirectAttributes) {
 
@@ -199,7 +201,6 @@ public class BoardController {
 
         }//end for
     }
-
 
 
 }

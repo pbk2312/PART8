@@ -6,8 +6,10 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.zerock.b01_2.dto.MemberJoinDTO;
 
 @Controller
 @RequestMapping("/member")
@@ -26,6 +28,25 @@ public class MemberController {
         }
 
     }
+
+    @GetMapping("/join")
+    public void joinGET() {
+
+        log.info("join get...");
+
+    }
+
+    @PostMapping("/join")
+    public String joinPOST(MemberJoinDTO memberJoinDTO) {
+
+        log.info("join POST...");
+        log.info(memberJoinDTO);
+
+        return "redirect:/board/list";
+
+
+    }
+
 
 }
 

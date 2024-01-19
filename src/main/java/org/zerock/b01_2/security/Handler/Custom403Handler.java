@@ -11,6 +11,9 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 import java.io.IOException;
 
+// <form> 태그의 요청이 403인 경우 로그인 페이지로 이동할 때 'ACCESS_DENIED' 값을 파라미터로 같이 전달
+// Ajax 인 경우에는 JSON 데이터를 전송
+
 @Log4j2
 public class Custom403Handler implements AccessDeniedHandler {
     @Override

@@ -62,7 +62,7 @@ public class CustomSecurityConfig {
                 .userDetailsService(userDetailsService)
                 .tokenValiditySeconds(60 * 60 * 24 * 30));
 
-        http.logout(logout -> logout.deleteCookies("remember-me"));
+        http.logout(logout -> logout.deleteCookies("remember-me")); // 로그아웃할려면 GET 방식으로 /logout 호출
 
         http.exceptionHandling(config -> {
             config.accessDeniedHandler(accessDeniedHandler());

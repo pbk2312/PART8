@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.zerock.b01_2.domain.Board;
 import org.zerock.b01_2.domain.Reply;
-import org.zerock.b01_2.repository.search.ReplyRepository;
 
 @SpringBootTest
 @Log4j2

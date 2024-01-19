@@ -15,7 +15,6 @@ import org.zerock.b01_2.domain.Board;
 import org.zerock.b01_2.domain.BoardImage;
 import org.zerock.b01_2.dto.BoardListAllDTO;
 import org.zerock.b01_2.dto.BoardListReplyCountDTO;
-import org.zerock.b01_2.repository.search.ReplyRepository;
 
 import java.util.List;
 import java.util.Optional;

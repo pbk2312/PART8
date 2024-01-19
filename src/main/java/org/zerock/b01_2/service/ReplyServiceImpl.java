@@ -13,7 +13,7 @@ import org.zerock.b01_2.domain.Reply;
 import org.zerock.b01_2.dto.PageRequestDTO;
 import org.zerock.b01_2.dto.PageResponseDTO;
 import org.zerock.b01_2.dto.ReplyDTO;
-import org.zerock.b01_2.repository.search.ReplyRepository;
+import org.zerock.b01_2.repository.ReplyRepository;
 
 import java.util.List;
 import java.util.Optional;
