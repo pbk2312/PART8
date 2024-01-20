@@ -68,6 +68,10 @@ public class CustomSecurityConfig {
             config.accessDeniedHandler(accessDeniedHandler());
         });
 
+        http.oauth2Login(httpSecurityOAuth2LoginConfigurer -> {
+            httpSecurityOAuth2LoginConfigurer.loginPage("/member/login"); // 책과 다름 수정
+        });
+
 
         return http.build();
 
