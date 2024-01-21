@@ -1,10 +1,7 @@
 package org.zerock.b01_2.domain;
 
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.zerock.b01_2.domain.BaseEntity;
 
@@ -21,6 +18,7 @@ public class Member extends BaseEntity {
 
 
     @Id
+
     private String mid;
 
     private String mpw;

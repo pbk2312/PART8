@@ -25,8 +25,7 @@ import java.util.stream.Collectors;
 @Log4j2
 @Service
 @RequiredArgsConstructor
-public class CustomOAuth2UserService extends DefaultOAuth2UserService { // DefaultOAuth2UserService 는 카카오 뿐 아니라 구글이나 페이스북 등의 다양한 소셜 로그인에서 사용 가능 합니다
-
+public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
@@ -34,15 +33,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService { // Defau
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
-        log.info("userRequest....");
+        log.info("userRequest >>>>>>>>>>>>>>>>>>>>>>>>");
         log.info(userRequest);
-
-        log.info("oauth2 user.....................................");
 
         ClientRegistration clientRegistration = userRequest.getClientRegistration();
         String clientName = clientRegistration.getClientName();
 
         log.info("NAME: " + clientName);
+
         OAuth2User oAuth2User = super.loadUser(userRequest);
         Map<String, Object> paramMap = oAuth2User.getAttributes();
 
@@ -63,9 +61,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService { // Defau
 
     private MemberSecurityDTO generateDTO(String email, Map<String, Object> params) {
 
+        log.info("------------------------------------------111111111111111111");
+
         Optional<Member> result = memberRepository.findByEmail(email);
 
+        log.info("result : " + result);
         //데이터베이스에 해당 이메일을 사용자가 없다면
+//        if(((Optional<?>) result).isEmpty()){
         if (result.isEmpty()) {
             //회원 추가 -- mid는 이메일 주소/ 패스워드는 1111
             Member member = Member.builder()
@@ -101,7 +103,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService { // Defau
         }
     }
 
-
     private String getKakaoEmail(Map<String, Object> paramMap) {
 
         log.info("KAKAO-----------------------------------------");
@@ -118,5 +119,4 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService { // Defau
 
         return email;
     }
-
 }

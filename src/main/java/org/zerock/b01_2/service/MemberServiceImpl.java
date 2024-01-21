@@ -24,19 +24,22 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public void join(MemberJoinDTO memberJoinDTO) throws MidExistException{
 
+
         String mid = memberJoinDTO.getMid();
 
         boolean exist = memberRepository.existsById(mid); // mid 값이 유일한지 체크
 
-        if (exist){
-            throw new MidExistException(); // 문제가 발생하면 예외정
-        }
 
-        Member member = modelMapper.map(memberJoinDTO,Member.class);
+        if(exist){
+            throw new MidExistException();
+        }   // 문제가 발생하면 예외정
+
+
+        Member member = modelMapper.map(memberJoinDTO, Member.class);
         member.changePassword(passwordEncoder.encode(memberJoinDTO.getMpw()));
         member.addRole(MemberRole.USER);
 
-        log.info("==============");
+        log.info("=======================");
         log.info(member);
         log.info(member.getRoleSet());
 
