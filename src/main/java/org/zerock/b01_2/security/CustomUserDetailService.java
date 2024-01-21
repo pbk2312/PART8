@@ -57,6 +57,7 @@ public class CustomUserDetailService implements UserDetailsService {
                 member.getRoleSet().stream().map(memberRole -> new SimpleGrantedAuthority("ROLE_" + memberRole.name())).collect(Collectors.toList())
         );
 
+
         log.info("memberSecurityDTO");
         log.info("memSecurityDTO");
 

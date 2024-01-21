@@ -26,8 +26,8 @@ public class Member extends BaseEntity {
     private String mpw;
     private String email;
     private boolean del;
-
     private boolean social;
+
 
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
