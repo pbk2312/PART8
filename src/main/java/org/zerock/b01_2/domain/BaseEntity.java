@@ -1,6 +1,6 @@
 package org.zerock.b01_2.domain;
 
-
+//
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

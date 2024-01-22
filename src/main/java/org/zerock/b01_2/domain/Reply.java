@@ -1,5 +1,5 @@
 package org.zerock.b01_2.domain;
-
+//
 
 import jakarta.persistence.*;
 import lombok.*;

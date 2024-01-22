@@ -3,8 +3,6 @@ package org.zerock.b01_2.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.zerock.b01_2.domain.BaseEntity;
-
 import java.util.HashSet;
 import java.util.Set;
 

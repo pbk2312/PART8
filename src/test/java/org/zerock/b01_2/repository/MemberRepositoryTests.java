@@ -6,11 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Commit;
-import org.zerock.b01_2.domain.Member;
-import org.zerock.b01_2.domain.MemberRole;
 
-import java.util.Optional;
-import java.util.stream.IntStream;
 
 @SpringBootTest
 @Log4j2
