@@ -23,7 +23,6 @@ import org.zerock.b01_2.security.Handler.CustomSocialLoginSuccessHandler;
 import javax.sql.DataSource;
 
 // 시큐리티 설정
-
 @Log4j2
 @RequiredArgsConstructor
 @Configuration
