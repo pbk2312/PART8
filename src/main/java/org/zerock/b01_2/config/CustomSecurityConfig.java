@@ -13,12 +13,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.zerock.b01_2.security.CustomUserDetailsService;
 import org.zerock.b01_2.security.Handler.Custom403Handler;
+import org.zerock.b01_2.security.Handler.CustomSocialLoginSuccessHandler;
 
 import javax.sql.DataSource;
+
+// 시큐리티 설정
 
 @Log4j2
 @RequiredArgsConstructor
@@ -57,8 +61,18 @@ public class CustomSecurityConfig {
         // POST 방식 처리 역시 같은 경로로 스프링 시큐리티 내부에서 처리됩니다.로그아웃 방식도 마찬가지로 POST 방식으로 처리되는 로그아웃
         // 역시 스프링 시큐리티가 처리하고 개발자가 간단하게 GET 방식으로 동작하는 로그아웃 화면을 구성하기만 하면 됩니다.
 
+        http.oauth2Login( httpSecurityOAuth2LoginConfigurer -> {
+            httpSecurityOAuth2LoginConfigurer.loginPage("/member/login");
+            httpSecurityOAuth2LoginConfigurer.successHandler(authenticationSuccessHandler());
+        }); // 로그인 성공시
+
+
+
+
+
         // http.csrf().disable();
         http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable()); // 버전 변경 , CSRF 토큰 비활성화 -> username 과 password 라는 파라미터만으로 로그인 가능
+        http.logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout"));
 
 
         http.rememberMe(httpSecurityRememberMeConfigurer -> {
@@ -110,6 +124,16 @@ public class CustomSecurityConfig {
     public AccessDeniedHandler accessDeniedHandler() {
         return new Custom403Handler();
     }
+
+    // 로그인 성공 처리 시 이용하도록 하는 부분
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler(){
+
+        return new CustomSocialLoginSuccessHandler(passwordEncoder());
+
+    }
+
 
 
 }

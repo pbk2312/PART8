@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Commit;
 import org.zerock.b01_2.domain.Member;
 import org.zerock.b01_2.domain.MemberRole;
 
@@ -47,7 +48,7 @@ public class MemberRepositoryTests {
     }
      */
 
-    @Test
+    /*@Test
     public void testRead() {
         // 회원 조회 테스트
 
@@ -59,6 +60,19 @@ public class MemberRepositoryTests {
         log.info(member.getRoleSet());
 
         member.getRoleSet().forEach(memberRole -> log.info(memberRole.name()));
+
+    }
+     */
+
+    @Commit
+    @Test
+    public void testUpdate() {
+
+        String mid = "pbk05255@daum.net"; // 소셜 로그인으로 추가된 사용자로 현재 DB에 존재하는 이메일
+        String mpw = passwordEncoder.encode("54321"); // 비밀번호 변경
+
+        memberRepository.updatePassword(mpw, mid);
+
 
     }
 
